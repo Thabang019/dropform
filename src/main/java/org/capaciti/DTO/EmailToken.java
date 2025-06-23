@@ -12,8 +12,9 @@ public class EmailToken {
         @Id
         private String token;
 
-        @Column(nullable = false)
-        private String userEmail;
+        @OneToOne
+        @JoinColumn(name = "email_user")
+        private User userEmail;
 
         @Column(name = "time")
         private LocalDateTime time = LocalDateTime.now();
@@ -31,7 +32,7 @@ public class EmailToken {
                 return token;
         }
 
-        public String getUserEmail() {
+        public User getUserEmail() {
                 return userEmail;
         }
 
@@ -59,14 +60,14 @@ public class EmailToken {
         public static class Builder {
 
                 private String token;
-                private String userEmail;
+                private User userEmail;
 
                 public Builder setToken(String token) {
                         this.token = token;
                         return this;
                 }
 
-                public Builder setUserEmail(String userEmail) {
+                public Builder setUserEmail(User userEmail) {
                         this.userEmail = userEmail;
                         return this;
                 }

@@ -32,7 +32,7 @@ public class ContactRequestController {
             if (token == null) {
                 return ResponseEntity.badRequest().body("Invalid or missing token.");
             }
-            emailService.sendEmail(token.getUserEmail(), contactRequest);
+            emailService.sendEmail(token.getUserEmail().getEmailUser(), contactRequest);
             return ResponseEntity.ok("Message sent successfully!");
 
         } catch (Exception e) {

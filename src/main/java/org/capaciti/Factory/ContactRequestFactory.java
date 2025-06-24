@@ -1,6 +1,6 @@
 package org.capaciti.Factory;
 
-import org.capaciti.DTO.ContactRequest;
+import org.capaciti.Domain.ContactRequest;
 
 public class ContactRequestFactory {
 

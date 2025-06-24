@@ -1,7 +1,6 @@
 package org.capaciti.Services;
 
-import org.capaciti.DTO.ContactRequest;
-import org.capaciti.DTO.EmailToken;
+import org.capaciti.Domain.ContactRequest;
 import org.capaciti.Factory.ContactRequestFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
@@ -9,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

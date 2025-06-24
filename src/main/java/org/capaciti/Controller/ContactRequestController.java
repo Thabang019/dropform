@@ -1,16 +1,13 @@
 package org.capaciti.Controller;
 
 
-import org.capaciti.DTO.EmailToken;
-import org.capaciti.Repository.EmailTokenRepository;
+import org.capaciti.Domain.EmailToken;
 import org.capaciti.Services.EmailTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.capaciti.DTO.ContactRequest;
+import org.capaciti.Domain.ContactRequest;
 import org.capaciti.Services.EmailSender;
-
-import java.util.Optional;
 
 
 @RestController

@@ -1,10 +1,9 @@
 package org.capaciti.Services;
 
-import org.capaciti.DTO.EmailToken;
-import org.capaciti.DTO.User;
+import org.capaciti.Domain.EmailToken;
+import org.capaciti.Domain.User;
 import org.capaciti.Factory.EmailTokenFactory;
 import org.capaciti.Factory.UserFactory;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;

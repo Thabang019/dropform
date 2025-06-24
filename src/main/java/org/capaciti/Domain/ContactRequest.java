@@ -1,4 +1,4 @@
-package org.capaciti.DTO;
+package org.capaciti.Domain;
 
 public class ContactRequest {
 

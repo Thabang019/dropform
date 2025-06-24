@@ -1,6 +1,6 @@
 package org.capaciti.Services;
 
-import org.capaciti.DTO.User;
+import org.capaciti.Domain.User;
 import org.capaciti.Factory.UserFactory;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

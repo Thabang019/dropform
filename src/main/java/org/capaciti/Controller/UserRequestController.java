@@ -1,8 +1,11 @@
 package org.capaciti.Controller;
 
-import org.capaciti.DTO.EmailToken;
-import org.capaciti.DTO.User;
+import org.capaciti.DTO.JwtAuthenticationResponse;
+import org.capaciti.DTO.SignInRequest;
+import org.capaciti.Domain.EmailToken;
+import org.capaciti.Domain.User;
 import org.capaciti.Factory.EmailTokenFactory;
+import org.capaciti.Services.AuthenticationService;
 import org.capaciti.Services.EmailTokenService;
 import org.capaciti.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,12 @@ public class UserRequestController {
 
     private UserService userService;
     private EmailTokenService emailTokenService;
+    private AuthenticationService authenticationService;
     @Autowired
-    UserRequestController(UserService service, EmailTokenService emailTokenService) {
+    UserRequestController(UserService service, EmailTokenService emailTokenService, AuthenticationService authenticationService) {
         this.userService = service;
         this.emailTokenService = emailTokenService;
+        this.authenticationService = authenticationService;
     }
 
     @PostMapping("/save")
@@ -33,5 +38,11 @@ public class UserRequestController {
     public User read(@PathVariable String email){
         return userService.read(email);
     }
+
+    @PostMapping("/signin")
+    public JwtAuthenticationResponse signin(@RequestBody SignInRequest request) {
+        return authenticationService.signin(request);
+    }
+
 
 }

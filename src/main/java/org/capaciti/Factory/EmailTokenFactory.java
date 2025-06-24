@@ -1,8 +1,7 @@
 package org.capaciti.Factory;
 
-import org.capaciti.DTO.ContactRequest;
-import org.capaciti.DTO.EmailToken;
-import org.capaciti.DTO.User;
+import org.capaciti.Domain.EmailToken;
+import org.capaciti.Domain.User;
 
 public class EmailTokenFactory {
 

@@ -1,6 +1,6 @@
 package org.capaciti.Repository;
 
-import org.capaciti.DTO.EmailToken;
+import org.capaciti.Domain.EmailToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

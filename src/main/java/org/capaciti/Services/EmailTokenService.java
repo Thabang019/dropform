@@ -1,7 +1,7 @@
 package org.capaciti.Services;
 
 import jakarta.transaction.Transactional;
-import org.capaciti.DTO.EmailToken;
+import org.capaciti.Domain.EmailToken;
 import org.capaciti.Repository.EmailTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

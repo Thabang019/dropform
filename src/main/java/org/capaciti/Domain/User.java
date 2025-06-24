@@ -1,24 +1,34 @@
-package org.capaciti.DTO;
+package org.capaciti.Domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.management.relation.Role;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     private String emailUser;
     private String nameUser;
     private String lastNameUser;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.User;
 
 
 
     public User() {
+    }
+
+    public enum Role {
+        User,
     }
 
     private User(Builder builder) {
@@ -44,25 +54,60 @@ public class User {
         return password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    @Override
+    public String getUsername() {
+        return String.valueOf(emailUser);
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name())) ;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(emailUser, user.emailUser) && Objects.equals(nameUser, user.nameUser) && Objects.equals(lastNameUser, user.lastNameUser) && Objects.equals(password, user.password);
+        return Objects.equals(emailUser, user.emailUser) && Objects.equals(nameUser, user.nameUser) && Objects.equals(lastNameUser, user.lastNameUser) && Objects.equals(password, user.password) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(emailUser, nameUser, lastNameUser, password);
+        return Objects.hash(emailUser, nameUser, lastNameUser, password, role);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "emailUser='" + emailUser + '\'' +
-                ", name_user='" + nameUser + '\'' +
-                ", lastName_user='" + lastNameUser + '\'' +
+                ", nameUser='" + nameUser + '\'' +
+                ", lastNameUser='" + lastNameUser + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
                 '}';
     }
 

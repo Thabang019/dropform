@@ -1,6 +1,6 @@
 package org.capaciti.Factory;
 
-import org.capaciti.DTO.User;
+import org.capaciti.Domain.User;
 
 public class UserFactory {
 

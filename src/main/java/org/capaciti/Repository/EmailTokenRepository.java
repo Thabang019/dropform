@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface EmailTokenRepository extends JpaRepository<EmailToken, String> {
 
     EmailToken findEmailTokenByToken(String token);
+    EmailToken findEmailTokenByUserEmail_EmailUser(String email);
 }

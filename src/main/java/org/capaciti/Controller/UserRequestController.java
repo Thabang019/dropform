@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user/send")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://127.0.0.1:5500", allowCredentials = "true")
 public class UserRequestController {
 
     private UserService userService;
@@ -41,7 +41,14 @@ public class UserRequestController {
 
     @PostMapping("/signin")
     public JwtAuthenticationResponse signin(@RequestBody SignInRequest request) {
+        System.out.println("signin triggered");
         return authenticationService.signin(request);
+    }
+
+    @GetMapping("/retrieveToken/{email}")
+    public EmailToken readToken(@PathVariable String email){
+        System.out.println("retrieveToken triggered");
+        return emailTokenService.readByEmail(email);
     }
 
 

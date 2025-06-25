@@ -28,6 +28,7 @@ public class AuthenticationService {
     }
 
     public JwtAuthenticationResponse signin(SignInRequest request) {
+        System.out.println("JwtAuthenticationResponse triggered");
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getLoginEmail(), request.getLoginPassword()));
         var user = userRepository.findUserByEmailUser(request.getLoginEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));

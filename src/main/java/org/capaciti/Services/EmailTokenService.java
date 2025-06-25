@@ -31,6 +31,10 @@ public class EmailTokenService {
     public EmailToken read(String token) {
         return emailTokenRepository.findEmailTokenByToken(token);
     }
+
+    public EmailToken readByEmail(String email) {
+        return emailTokenRepository.findEmailTokenByUserEmail_EmailUser(email);
+    }
 }
 
 

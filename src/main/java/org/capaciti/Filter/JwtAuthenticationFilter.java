@@ -23,15 +23,21 @@ import java.io.IOException;
 
 @Component
 @Slf4j
-public class JwtAuthenticationFilter  extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserService userService;
 
     @Autowired
-    JwtAuthenticationFilter(JwtService jwtService, UserService userService){
+    JwtAuthenticationFilter(JwtService jwtService, UserService userService) {
         this.jwtService = jwtService;
         this.userService = userService;
+    }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getRequestURI();
+        return path.equals("/api/user/send/signin") || path.equals("/api/user/send/save");
     }
 
     @Override
@@ -39,16 +45,18 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
+
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String email;
+
         if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
-        jwt = authHeader.substring(7);
 
-        System.out.println("JWT - {}" + jwt);
+        jwt = authHeader.substring(7);
+        System.out.println("JWT - " + jwt);
 
         email = jwtService.extractUserName(jwt);
 
@@ -56,17 +64,17 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
             UserDetails userDetails = userService.loadUserByUsername(email);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
-
-                System.out.println("User - {}" + userDetails);
+                System.out.println("User - " + userDetails);
 
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 context.setAuthentication(authToken);
                 SecurityContextHolder.setContext(context);
             }
         }
+
         filterChain.doFilter(request, response);
     }
 }

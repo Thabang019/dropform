@@ -13,4 +13,14 @@ public class ContactRequestFactory {
                 .setToken(token)
                 .build();
     }
+
+    public static ContactRequest createContactRequest(String name, String email, String message, String token){
+        return new ContactRequest.Builder()
+                .setName(name)
+                .setEmail(email)
+                .setSubject("Message from website")
+                .setMessage(message)
+                .setToken(token)
+                .build();
+    }
 }

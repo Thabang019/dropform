@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user/send")
-@CrossOrigin(origins = "https://dropform-gtq9.onrender.com", allowCredentials = "true")
+@CrossOrigin(origins = "https://dropform-kappa.vercel.app", allowCredentials = "true")
 public class UserRequestController {
 
     private UserService userService;
